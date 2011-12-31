@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Slider Control</title>
+  
+  <style>
+    .container {
+      width:      940px;
+      margin:     0 auto;
+      font-family: sans-serif;
+      color: rgba(0, 0, 0, .5);
+    }
+    
+    .slider-control {
+      width:            500px;
+      height:           125px;
+      background-color: rgba(242, 157, 237, .3);
+      position:         relative;
+    }
+    
+    .slider-track {
+      width: 470px;
+      height: 4px;
+      background-color: rgba(97, 99, 98, 1);
+      position: absolute;
+        top: 62px;
+        left: 15px
+    }
+    
+    .slider-thumb {
+      width: 20px;
+      height: 50px;
+      background-color: rgba(196, 185, 185, 1);
+      cursor: pointer;
+      position: absolute;
+        top: 39px;
+/*        left: 15px;*/
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input type="text" id="percentage" name="percentage" class="slider from0 to100 scale4" value="0">
+  </div>
+  
+  <script src="slider.js"></script>
+</body>
+</html>
