@@ -1,11 +1,13 @@
 console.log("ready now");
+var sliderFields = document.getElementsByClassName('slider');
+		console.log('sliderFields is equal to: ' + sliderFields);
 
 var Slider = 
 {
 	init: function()
 	{
 		var sliderFields = document.getElementsByClassName('slider');
-		console.log('sliderFields is equal to: ' + sliderFields);
+		console.log(sliderFields);
 		
 		for (var i = 0; i< sliderFields.length; i++) {
 			console.log("sliderFields[i]= " + sliderFields[i]);
@@ -38,28 +40,32 @@ var Slider =
 			thumb.id = sliderFields[i].id + "-thumb";
 			thumb.className = "slider-thumb";
 			
+			var inputBox = sliderFields[i]
+			
 
 			// Stores values that even listeners will need 
 			thumb._input = sliderFields[i];
 			thumb._from = from;
 			thumb._to = to;
 			thumb._scale = scale;
-			// 
-			// // caputures input typed directly into text field
+
+      // caputures input typed directly into text field
 			sliderFields[i]._thumb = thumb;
 
 			// //now add previously created DOM elements to the DOM
 			// var container = document.getElementsByClassName('container');
 			document.body.appendChild(slider);
-			slider.appendChild(track);
-			slider.appendChild(thumb);
-			sliderFields[i].parentNode.replaceChild(slider, sliderFields[i]);
-			slider.appendChild(sliderFields[i]);
+      slider.appendChild(track);
+      slider.appendChild(thumb);
+      sliderFields[i].parentNode.replaceChild(slider, sliderFields[i]);
+      slider.appendChild(inputBox);
 			
 			// lastly, position the thumb handle by adjusting it's 'left' property
-			// var value = parseInt(sliderFields[i].value, 10);
-			// console.log(value);
-			// thumb.style.left = ((value - from) * scale) + "px";
+      var value = parseInt(sliderFields[i].value, 10);
+      thumb.style.left = ((value - from) * scale) + "px";
+      
+      inputBox.addEventListener("change", Slider.changeListener);
+      thumb.addEventListener("mousedown", function() {alert('mousedown')})
 		} //end for
 	} // end function
 } // end slider
