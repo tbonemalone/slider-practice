@@ -48,7 +48,6 @@ var Slider =
 			thumb._from = from;
 			thumb._to = to;
 			thumb._scale = scale;
-
       // caputures input typed directly into text field
 			sliderFields[i]._thumb = thumb;
 
@@ -65,9 +64,55 @@ var Slider =
       thumb.style.left = ((value - from) * scale) + "px";
       
       inputBox.addEventListener("change", Slider.changeListener);
-      thumb.addEventListener("mousedown", function() {alert('mousedown')})
+      thumb.addEventListener("mousedown", Slider.mousedownListener);
 		} //end for
-	} // end function
+	}, // end init
+	
+	changeListener: function(event) {
+	  var thumb = this._thumb;
+	  var value = parseInt(this.value, 10);
+	  
+	  if(value < thumb._from) {
+	     value = thumb._from;
+	  } else if(value > thumb._to) {
+	    value = thumb._to;
+	  }
+	  
+	  thumb.style.left = ((value - thumb._from) * thumb._scale) + "px";
+	  this.value = value;
+	  
+	  
+	}, //end changeListener
+	
+	mousedownListener: function(event) {
+	  this._valueorigin = parseInt(this.style.left, 10) / this._scale - this._from;
+	  this._dragorigin = event.clientX;
+	  document._currentThumb = this;
+    
+    document.addEventListener("mousemove", Slider.mousemoveListener);
+    document.addEventListener("mouseup", Slider.mouseupListener);
+    
+	}, // end mousedownListener;
+	
+	mousemoveListener: function(event) {
+	 var thumb = document._currentThumb;
+	 var value = thumb._valueorigin + (event.clientX - thumb._dragorigin)  / thumb._scale;
+	 
+	  if(value < thumb._from) {
+	     value = thumb._from;
+	  } else if(value > thumb._to) {
+	    value = thumb._to;
+	  }
+	 
+	 thumb.style.left = ((value - thumb._from) * thumb._scale) + "px";
+	 thumb._input.value = value;
+	}, // end mousemoveListener
+	
+	mouseupListener: function(event) {
+	  document._currentThumb = null;
+	  document.removeEventListener("mousemove", Slider.mousemoveListener);
+	  document.removeEventListener("mouseup", Slider.mouseupListener);
+	}
 } // end slider
 
 Slider.init();
