@@ -1,22 +1,15 @@
 console.log("ready now");
-var sliderFields = document.getElementsByClassName('slider');
-		console.log('sliderFields is equal to: ' + sliderFields);
 
 var Slider = 
 {
 	init: function()
 	{
 		var sliderFields = document.getElementsByClassName('slider');
-		console.log(sliderFields);
 		
 		for (var i = 0; i< sliderFields.length; i++) {
-			console.log("sliderFields[i]= " + sliderFields[i]);
-			console.log(sliderFields[i].id);
 			//.exec(str) looks for regex matches in the provided str
 			// regex to splits up each class and finds the number
 			var fromMatch = /(^| )from(\d+)( |$)/.exec(sliderFields[i].className);
-			console.log(fromMatch);
-			console.log(fromMatch[2]);
 			var from = parseInt(fromMatch[2], 10);
 			
 			var toMatch = /(^| )to(\d+)( |$)/.exec(sliderFields[i].className);
@@ -80,8 +73,6 @@ var Slider =
 	  
 	  thumb.style.left = ((value - thumb._from) * thumb._scale) + "px";
 	  this.value = value;
-	  
-	  
 	}, //end changeListener
 	
 	mousedownListener: function(event) {
